@@ -1,12 +1,12 @@
 package com.fs.user.sevice.UserService.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "micro_user")
@@ -28,5 +28,8 @@ public class User
 
     @Column(name = "ABOUT")
     private String userAbout;
+
+    @Transient
+    private List<Rating> rating = new ArrayList<>(); 
 
 }
