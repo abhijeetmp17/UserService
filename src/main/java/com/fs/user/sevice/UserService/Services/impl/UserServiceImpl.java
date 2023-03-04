@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.rmi.server.UID;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 import java.util.UUID;
 
@@ -44,16 +45,22 @@ public class UserServiceImpl implements UserService
 
     //update user
     @Override
-    public User updateUser() {
-        return null;
+    public User updateUser(String id , User user) {
+        User user1 = userRepo.findById(id).
+                orElseThrow(() -> new ResourceNotFoundException("Resource not found bu ID :" + id));
+        user1.setUserEmail(user.getUserEmail());
+        user1.setUserName(user.getUserName());
+        user1.setUserAbout(user.getUserAbout());
+
+        User save = userRepo.save(user1);
+        return save;
     }
 
     //delete user
+
+
     @Override
-    public User deleteUser() {
-        return null;
+    public void deleteUser(String id) {
+        userRepo.deleteById(id);
     }
-
-
-
 }
